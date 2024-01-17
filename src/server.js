@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
+const authRouter = require('./routes/authRoutes');
 
 const app = express();
 
@@ -15,6 +16,10 @@ app.use(cors());
 app.get('/', (req, res) => {
   res.json('Hello World!');
 });
+
+// use routes
+// /api  /auth/login
+app.use('/api', authRouter);
 
 // 404 not foun page api
 app.use((req, res) => {
