@@ -1,8 +1,11 @@
+/* eslint-disable import/no-extraneous-dependencies */
 require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
+const chalk = require('chalk');
 const cors = require('cors');
 const authRouter = require('./routes/authRoutes');
+const { mainErrroHandler } = require('./middleware');
 
 const app = express();
 
@@ -17,17 +20,20 @@ app.get('/', (req, res) => {
   res.json('Hello World!');
 });
 
-// use routes
-// /api  /auth/login
+// use routers
+// /api         /auth/login
 app.use('/api', authRouter);
 
-// 404 not foun page api
+// 404 not found page api
 app.use((req, res) => {
   res.status(404).json({
     error: 'Page not found',
   });
 });
 
+// visos musu klaidos
+app.use(mainErrroHandler);
+
 app.listen(port, () => {
-  console.log(`Server is listening on port ${port}`);
+  console.log(chalk.blue(`Server is listening on port ${port}`));
 });
