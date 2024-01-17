@@ -1,11 +1,10 @@
-const item = {
+const items = {
   id: 1,
   title: 'iPhone 9',
   description: 'An apple mobile which is nothing like apple',
-  price: 549,
+  price: 549.55,
   rating: 4.69,
   stock: 94,
-  brand: 'Apple',
   cat_id: 'smartphones',
   img_url: '...',
 };
@@ -15,10 +14,11 @@ const categories = {
   name: 'smartphones',
 };
 
-const customer = {
+const customers = {
   id: 1,
   email: 'james@bond.com',
   password: '123456',
+  created_at: 'timestamp()',
 };
 
 const orders = {
