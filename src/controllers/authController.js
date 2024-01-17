@@ -27,7 +27,12 @@ const login = async (req, res, next) => {
 
   // patikrinti ar sutampa slaptazodiziai
 
-  res.json(rowsArr);
+  const foundUser = rowsArr[0];
+
+  if (!bcrypt.compareSync(password, foundUser.password)) {
+    return next({ error: 'Email or password do not match' });
+  }
+  return res.status(200).json({ msg: 'Successful login' });
 };
 const register = async (req, res, next) => {
   // pasiimti duomenis kuriuos gavom
