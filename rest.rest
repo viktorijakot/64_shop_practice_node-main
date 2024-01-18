@@ -21,3 +21,6 @@ Content-Type: application/json
 
 ### GET all items
 GET http://localhost:3000/api/items
+
+### GET single
+GET http://localhost:3000/api/items/1
