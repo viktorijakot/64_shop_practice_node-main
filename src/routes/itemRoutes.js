@@ -3,6 +3,7 @@ const express = require('express');
 const itemRouter = express.Router();
 
 const itemsController = require('../controllers/itemsController');
+const { validateItemBody, validateToken } = require('../middleware');
 
 // routes
 
@@ -13,7 +14,7 @@ itemRouter.get('/items', itemsController.getAll);
 itemRouter.get('/items/:itemId', itemsController.getSingle);
 
 // POST single item route /api/items
-itemRouter.post('/items', itemsController.create);
+itemRouter.post('/items', validateToken, validateItemBody, itemsController.create);
 
 // DELETE single item route /api/items/:itemId
 itemRouter.delete('/items/:itemId', itemsController.delete);

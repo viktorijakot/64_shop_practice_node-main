@@ -23,20 +23,21 @@ Content-Type: application/json
 GET http://localhost:3000/api/items
 
 ### GET single
-GET http://localhost:3000/api/items/1
+GET http://localhost:3000/api/items/3
 
 ### POST item
 POST http://localhost:3000/api/items/
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbWVzQGJvbmRAY29tIiwic3ViIjoxLCJpYXQiOjE3MDU1OTY1MzksImV4cCI6MTcwNTYwMDEzOX0.ThZuxSKRQaUuvnUhWw4IVAsum-rRZ0_i-6hrSeyWmU8
 
 {
-    "title": "Course in Magic",
-    "description": "All you need to know about magic",
-    "price": 99.99,
-    "rating": 4.98,
-    "stock": 30,
-    "cat_id": 2,
-    "img_url": "https://picsum.photos/id/11/800/600"
+    "title": "Cup",
+    "description": "Blue, ceramic",
+    "price": 2.50,
+    "rating": 3.98,
+    "stock": 60,
+    "cat_id": 7,
+    "img_url": "https://picsum.photos/id/4/800/600"
 }
 
 ### DELETE single
@@ -44,3 +45,21 @@ DELETE  http://localhost:3000/api/items/2
 
 ### GET all categories
 GET  http://localhost:3000/api/categories
+
+### GET all orders
+GET  http://localhost:3000/api/orders
+
+### GET single users order
+GET  http://localhost:3000/api/orders/user/1
+
+### POST create users order
+POST http://localhost:3000/api/orders
+Content-Type: application/json
+
+{
+  "id": 1,
+  "item_id": 1,
+  "customer_id": 1,
+  "qty": 1,
+  "total": 500
+}
