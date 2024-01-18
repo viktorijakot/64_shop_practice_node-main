@@ -24,3 +24,20 @@ GET http://localhost:3000/api/items
 
 ### GET single
 GET http://localhost:3000/api/items/1
+
+### POST item
+POST http://localhost:3000/api/items/
+Content-Type: application/json
+
+{
+    "title": "Course in Magic",
+    "description": "All you need to know about magic",
+    "price": 99.99,
+    "rating": 4.98,
+    "stock": 30,
+    "cat_id": 2,
+    "img_url": "https://picsum.photos/id/11/800/600"
+}
+
+### DELETE single
+DELETE  http://localhost:3000/api/items/2
