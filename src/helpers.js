@@ -1,6 +1,7 @@
 const mysql = require('mysql2/promise');
+const jwt = require('jsonwebtoken');
 
-const { dbConfig } = require('./config');
+const { dbConfig, jwtSecret } = require('./config');
 
 async function makeSqlQuery(sql, argArr = []) {
   let connection;
@@ -21,6 +22,12 @@ async function makeSqlQuery(sql, argArr = []) {
   }
 }
 
+function makeJWTToken(data) {
+  if (!jwtSecret) throw new Error('no secret provided');
+  return jwt.sign(data, jwtSecret, { expiresIn: '1h' });
+}
+
 module.exports = {
   makeSqlQuery,
+  makeJWTToken,
 };

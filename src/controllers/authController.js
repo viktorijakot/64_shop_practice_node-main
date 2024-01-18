@@ -2,7 +2,7 @@
 
 const chalk = require('chalk');
 const bcrypt = require('bcryptjs');
-const { makeSqlQuery } = require('../helpers');
+const { makeSqlQuery, makeJWTToken } = require('../helpers');
 
 const login = async (req, res, next) => {
   // pasiimti email ir plain password
@@ -20,15 +20,26 @@ const login = async (req, res, next) => {
   // ar radom useri
   if (rowsArr.length === 0) {
     console.log(chalk.magentaBright('user not found ==='));
-    return next({ error: 'user not found' });
+    return next({ error: 'User not found' });
   }
 
   // radom useri
+  const foundUserInDB = rowsArr[0];
 
+  const passwordHash = foundUserInDB.password;
   // patikrinti ar sutampa slaptazodiziai
 
-  res.json(rowsArr);
+  if (!bcrypt.compareSync(password, passwordHash)) {
+    return next({ error: 'Password or email not match (pass not match)' });
+  }
+  // sekme
+  const token = makeJWTToken({ email, sub: foundUserInDB.id });
+  res.json({
+    msg: 'login success',
+    token,
+  });
 };
+
 const register = async (req, res, next) => {
   // pasiimti duomenis kuriuos gavom
   const { email, password } = req.body;
