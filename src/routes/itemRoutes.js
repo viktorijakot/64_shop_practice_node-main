@@ -9,4 +9,7 @@ const itemsController = require('../controllers/itemsController');
 // GET ALL items route /api/items
 itemRouter.get('/items', itemsController.getAll);
 
+// GET single item route /api/items/:itemId
+itemRouter.get('/items/:itemId', itemsController.getSingle);
+
 module.exports = itemRouter;
