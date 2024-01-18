@@ -7,6 +7,7 @@ const cors = require('cors');
 const authRouter = require('./routes/authRoutes');
 const { mainErrroHandler } = require('./middleware');
 const itemRouter = require('./routes/itemRoutes');
+const categoryRouter = require('./routes/categoryRoutes');
 
 const app = express();
 
@@ -26,6 +27,8 @@ app.get('/', (req, res) => {
 app.use('/api', authRouter);
 // /api         /items
 app.use('/api', itemRouter);
+// /api         /categories
+app.use('/api', categoryRouter);
 
 // 404 not found page api
 app.use((req, res) => {

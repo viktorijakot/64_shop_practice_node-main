@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 const ApiError = require('./apiError/apiError');
 
 const mainErrroHandler = (errorGot, req, res, next) => {
@@ -20,6 +21,16 @@ const mainErrroHandler = (errorGot, req, res, next) => {
   });
 };
 
+const validateItemBody = async (req, res, next) => {
+
+};
+
+const validateToken = async (req, res, next) => {
+
+};
+
 module.exports = {
   mainErrroHandler,
+  validateItemBody,
+  validateToken,
 };

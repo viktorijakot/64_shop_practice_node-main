@@ -1,3 +1,5 @@
+/* eslint-disable camelcase */
+/* eslint-disable import/no-unresolved */
 const ApiError = require('../apiError/apiError');
 const { makeSqlQuery } = require('../helpers');
 
@@ -60,7 +62,7 @@ module.exports = {
       return next(new ApiError('something went wrong', 400));
     }
 
-    res.status(201).json({
+    return res.status(201).json({
       id: resObj.insertId,
       msg: 'success',
     });
@@ -80,7 +82,7 @@ module.exports = {
       return next(new ApiError('something went wrong', 400));
     }
 
-    res.status(200).json({
+    return res.status(200).json({
       msg: 'Success',
     });
   },

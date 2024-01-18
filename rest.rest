@@ -41,3 +41,6 @@ Content-Type: application/json
 
 ### DELETE single
 DELETE  http://localhost:3000/api/items/2
+
+### GET all categories
+GET  http://localhost:3000/api/categories
