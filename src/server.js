@@ -6,6 +6,7 @@ const chalk = require('chalk');
 const cors = require('cors');
 const authRouter = require('./routes/authRoutes');
 const { mainErrroHandler } = require('./middleware');
+const itemRouter = require('./routes/itemRoutes');
 
 const app = express();
 
@@ -23,6 +24,8 @@ app.get('/', (req, res) => {
 // use routers
 // /api         /auth/login
 app.use('/api', authRouter);
+// /api         /items
+app.use('/api', itemRouter);
 
 // 404 not found page api
 app.use((req, res) => {

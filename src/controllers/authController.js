@@ -34,7 +34,7 @@ const login = async (req, res, next) => {
   }
   // sekme
   const token = makeJWTToken({ email, sub: foundUserInDB.id });
-  res.json({
+  return res.json({
     msg: 'login success',
     token,
   });
