@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/no-unresolved */
 const Yup = require('yup');
 const jwt = require('jsonwebtoken');
@@ -25,9 +26,9 @@ const mainErrroHandler = (errorGot, req, res, next) => {
 };
 
 const validateItemBody = async (req, res, next) => {
-  const {
-    title, description, price, rating, stock, cat_id, img_url,
-  } = req.body;
+  // const {
+  //   title, description, price, rating, stock, cat_id, img_url,
+  // } = req.body;
   const postScheme = Yup.object({
     title: Yup.string().trim().min(3).required('Title is missing'),
     description: Yup.string().trim().min(3).required('Description is missing'),
@@ -44,6 +45,7 @@ const validateItemBody = async (req, res, next) => {
   } catch (error) {
     console.log('error ===', error);
     const errorFormater = {};
+    // eslint-disable-next-line no-unused-vars
     const formatedErrors = error.inner.forEach((errObj) => {
       errorFormater[errObj.path] = errObj.message;
     });

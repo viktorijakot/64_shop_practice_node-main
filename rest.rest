@@ -40,7 +40,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImphbWVzQ
     "img_url": "https://picsum.photos/id/4/800/600"
 }
 
-### DELETE single
+### DELETE single item
 DELETE  http://localhost:3000/api/items/2
 
 ### GET all categories
