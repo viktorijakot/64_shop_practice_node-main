@@ -32,7 +32,7 @@ const login = async (req, res, next) => {
   // patikrinti ar sutampa slaptazodiziai
 
   if (!bcrypt.compareSync(password, passwordHash)) {
-    return next(new ApiError('Password or email not match (pass not match)', 401));
+    return next(new ApiError('Password or email does not match', 401));
   }
   // sekme
   const token = makeJWTToken({ email, sub: foundUserInDB.id });
