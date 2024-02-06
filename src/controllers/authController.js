@@ -35,16 +35,19 @@ const login = async (req, res, next) => {
     return next(new ApiError('Password or email does not match', 401));
   }
   // sekme
+  console.log('foundUserInDB ===', foundUserInDB);
   const token = makeJWTToken({ email, sub: foundUserInDB.id });
   return res.json({
-    msg: 'login success',
+    msg: `Welcome ${foundUserInDB.firstname} ${foundUserInDB.lastname}`,
     token,
   });
 };
 
 const register = async (req, res, next) => {
   // pasiimti duomenis kuriuos gavom
-  const { email, password } = req.body;
+  const {
+    email, password, firstname, lastname,
+  } = req.body;
 
   // console.log(chalk.magenta('req.body ===', req.body));
   console.log(chalk.magentaBright('req.body ==='), req.body);
@@ -54,8 +57,8 @@ const register = async (req, res, next) => {
 
   // irasyti i db
 
-  const sql = 'INSERT INTO `customers` (`email`, `password`) VALUES (?, ?)';
-  const [resObj, error] = await makeSqlQuery(sql, [email, passwordHash]);
+  const sql = 'INSERT INTO `customers` (`email`, `password`, `firstname`, `lastname`) VALUES (?, ?, ?, ?)';
+  const [resObj, error] = await makeSqlQuery(sql, [email, passwordHash, firstname, lastname]);
 
   if (error) {
     console.log(chalk.magentaBright('register error ==='), error);
