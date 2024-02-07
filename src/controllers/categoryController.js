@@ -52,4 +52,30 @@ module.exports = {
       message: 'Category deleted successfully!',
     });
   },
+  update: async (req, res, next) => {
+    const { id } = req.params;
+    const { name } = req.body;
+    const sql = 'UPDATE categories SET name=? WHERE id=?';
+
+    const [resObj, error] = await makeSqlQuery(sql, [name, id]);
+    if (error) {
+      console.log(' update item error ===', error);
+      return next(error);
+    }
+    // if (resObj.affectedRows === 1) {
+    //   return res.json({ msg: `student with id ${studentId} was updated` });
+    // }
+    // return res.status(201).json({
+    //   id: resObj.insertId,
+    //   msg: 'success',
+    // });
+    if (resObj.affectedRows !== 1) {
+      return next(new APIError('something went wrong in update', 400));
+    }
+
+    res.status(201).json({
+      id,
+      msg: `Student with id:${id} updated successfully`,
+    });
+  },
 };

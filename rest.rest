@@ -6,7 +6,7 @@ POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-    "email": "james@bond@com",
+    "email": "appp5@aapp5.com",
     "password": "123456"
 }
 
@@ -62,4 +62,13 @@ Content-Type: application/json
   "customer_id": 1,
   "qty": 1,
   "total": 500
+}
+
+### PUT update categories
+PUT http://localhost:3000/api/categories/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFwcHA1QGFhcHA1LmNvbSIsInVzZXJJZCI6Niwic2NvcGUiOiJjdXN0b21lciIsImlhdCI6MTcwNzI5Mzc0MiwiZXhwIjoxNzA3Mjk3MzQyfQ.8UJsxmrafD-svnJ7CCOGvUaXGEc0fNk0bguhi57sYnk
+
+{
+    "name": "Books"
 }

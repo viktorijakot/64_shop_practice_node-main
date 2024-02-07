@@ -32,6 +32,7 @@ const login = async (req, res, next) => {
     message: `Welcome ${foundUserInDB.firstname} ${foundUserInDB.lastname}!`,
     token,
   });
+  console.log('token ===', token);
 };
 
 const register = async (req, res, next) => {
