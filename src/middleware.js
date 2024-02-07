@@ -30,12 +30,12 @@ const validateItemBody = async (req, res, next) => {
   //   title, description, price, rating, stock, cat_id, img_url,
   // } = req.body;
   const postScheme = Yup.object({
+    cat_id: Yup.number().integer().required(),
     title: Yup.string().trim().min(3).required('Title is missing'),
     description: Yup.string().trim().min(3).required('Description is missing'),
     price: Yup.number().min(1).required('Price is missing'),
-    rating: Yup.number(),
+    rating: Yup.number().optional(),
     stock: Yup.number().integer().min(1).required('Stock is missing'),
-    cat_id: Yup.number().integer(),
     img_url: Yup.string().trim().min(3).required('Image url is missing'),
   });
   try {
@@ -61,7 +61,7 @@ const validateToken = async (req, res, next) => {
     const decoded = jwt.verify(token, jwtSecret);
     console.log('decoded ===', decoded);
     req.userEmail = decoded.email;
-    req.userId = decoded.sub;
+    req.userId = decoded.userId;
     console.log('req.userEmail  ===', req.userEmail);
     console.log('req.userId ===', req.userId);
     next();

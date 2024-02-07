@@ -75,7 +75,23 @@ module.exports = {
 
     res.status(201).json({
       id,
-      msg: `Student with id:${id} updated successfully`,
+      msg: `Category with id:${id} updated successfully`,
     });
+  },
+  single: async (req, res, next) => {
+    const { id } = req.params;
+
+    const sql = 'SELECT * FROM categories WHERE id=?';
+
+    const [itemArr, error] = await makeSqlQuery(sql, [id]);
+
+    if (error) {
+      console.log('error GET SINGLE student table ===');
+      return next(error);
+    }
+    if (itemArr.length === 0) {
+      return res.json('there is no such a student');
+    }
+    return res.json(itemArr[0]);
   },
 };

@@ -6,7 +6,10 @@ const { makeSqlQuery } = require('../helpers');
 module.exports = {
   getAll: async (req, res, next) => {
     // sukuriam sql
-    const sql = 'SELECT * FROM `items` WHERE isDeleted=0';
+    const sql = 'SELECT `i`.*, `c`.name AS `category_name` '
+    + 'FROM `items` as `i` '
+    + 'LEFT JOIN `categories` AS c ON `i`.`cat_id`  = `c`.`id`'
+    + 'WHERE `i`.`isDeleted` = 0';
 
     // makeSqlQuery
     const [itemsArr, error] = await makeSqlQuery(sql);
@@ -46,7 +49,7 @@ module.exports = {
       title, description, price, rating, stock, cat_id, img_url,
     } = req.body;
 
-    const argArr = [title, description, price, rating, stock, cat_id, img_url];
+    const argArr = [title, description ?? null, price, rating ?? 0, stock, cat_id, img_url ?? ''];
     const sql = `INSERT INTO items (title, description, price, rating, stock, cat_id, img_url) 
     VALUES (?,?,?,?,?,?,?)`;
 

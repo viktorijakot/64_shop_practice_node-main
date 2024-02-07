@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const chalk = require('chalk');
 const cors = require('cors');
 const authRouter = require('./routes/authRoutes');
-const { mainErrroHandler } = require('./middleware');
+const { mainErrroHandler, validateToken } = require('./middleware');
 const itemRouter = require('./routes/itemRoutes');
 const categoryRouter = require('./routes/categoryRoutes');
 const orderRouter = require('./routes/orderRoutes');
@@ -29,7 +29,7 @@ app.use('/api', authRouter);
 // /api         /items
 app.use('/api', itemRouter);
 // /api         /categories
-app.use('/api', categoryRouter);
+app.use('/api', validateToken, categoryRouter);
 // /api         /order
 app.use('/api', orderRouter);
 

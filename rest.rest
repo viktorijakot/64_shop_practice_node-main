@@ -67,7 +67,7 @@ Content-Type: application/json
 ### PUT update categories
 PUT http://localhost:3000/api/categories/1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFwcHA1QGFhcHA1LmNvbSIsInVzZXJJZCI6Niwic2NvcGUiOiJjdXN0b21lciIsImlhdCI6MTcwNzI5Mzc0MiwiZXhwIjoxNzA3Mjk3MzQyfQ.8UJsxmrafD-svnJ7CCOGvUaXGEc0fNk0bguhi57sYnk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFwcHA1QGFhcHA1LmNvbSIsInVzZXJJZCI6Niwic2NvcGUiOiJjdXN0b21lciIsImlhdCI6MTcwNzMwNDIwMSwiZXhwIjoxNzA3MzA3ODAxfQ.uY25X6qjs21OawH7zWK1SledvS5h8A6SVDQqWQbFzLM
 
 {
     "name": "Books"

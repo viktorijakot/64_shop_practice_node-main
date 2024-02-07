@@ -8,6 +8,8 @@ const categoriesController = require('../controllers/categoryController');
 // GET /categories
 categoriesRouter.get('/categories', categoriesController.getAll);
 
+categoriesRouter.get('/categories/:id', categoriesController.single);
+
 // POST /categories
 categoriesRouter.post('/categories', categoriesController.create);
 
