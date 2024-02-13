@@ -19,4 +19,6 @@ itemRouter.post('/items', validateToken, validateItemBody, itemsController.creat
 // DELETE single item route /api/items/:itemId
 itemRouter.delete('/items/:itemId', validateToken, itemsController.delete);
 
+itemRouter.put('/items/:itemId', validateToken, itemsController.update);
+
 module.exports = itemRouter;
