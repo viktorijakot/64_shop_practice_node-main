@@ -31,7 +31,7 @@ app.use('/api', itemRouter);
 // /api         /categories
 app.use('/api', validateToken, categoryRouter);
 // /api         /order
-app.use('/api', orderRouter);
+app.use('/api', validateToken, orderRouter);
 
 // 404 not found page api
 app.use((req, res) => {
