@@ -67,7 +67,7 @@ module.exports = {
 
     return res.status(201).json({
       id: resObj.insertId,
-      msg: 'success',
+      msg: 'Item created successfully',
     });
   },
   delete: async (req, res, next) => {
@@ -86,7 +86,7 @@ module.exports = {
     }
 
     return res.status(200).json({
-      msg: 'Success',
+      msg: 'Item deleted successfully',
     });
   },
   update: async (req, res, next) => {
@@ -121,7 +121,7 @@ module.exports = {
 
     res.status(200).json({
       id: itemId,
-      message: `Item with id: ${itemId} updated successfully`,
+      msg: `Item with id: ${itemId} updated successfully`,
     });
   },
 };

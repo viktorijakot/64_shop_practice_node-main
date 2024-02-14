@@ -27,8 +27,13 @@ function makeJWTToken(data) {
   if (!jwtSecret) throw new Error('no secret provided');
   return jwt.sign(data, jwtSecret, { expiresIn: '1h' });
 }
+function parseJWTToken(token) {
+  if (!jwtSecret) throw new Error('no secret provided');
 
+  return jwt.decode(token);
+}
 module.exports = {
   makeSqlQuery,
   makeJWTToken,
+  parseJWTToken,
 };
