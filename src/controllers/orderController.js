@@ -32,7 +32,7 @@ module.exports = {
     const itemPrice = itemResponseObject[0].price;
     const orderTotal = itemPrice * quantity;
 
-    const sql = 'INSERT INTO `orders` (`item_id`, `customer_id`, `qty`, `price`, `total`) VALUES (?, ?, ?, ?, ?)';
+    let sql = 'INSERT INTO `orders` (`item_id`, `customer_id`, `qty`, `price`, `total`) VALUES (?, ?, ?, ?, ?)';
 
     const [responseObject, error] = await makeSqlQuery(sql, [
       item_id,
@@ -50,9 +50,25 @@ module.exports = {
       return next(new ApiError('something went wrong', 400));
     }
 
+    sql = 'UPDATE `items` SET `stock` = `stock` - ? WHERE `id` = ?';
+    const [responseObjectItem, errorItem] = await makeSqlQuery(sql, [quantity, item_id]);
+    if (errorItem) {
+      return next(errorItem);
+    }
+
+    if (responseObjectItem.affectedRows !== 1) {
+      sql = 'DELETE FROM `orders` WHERE `id` = ?';
+      const [responseObjectOrderDelete, errorOrderDelete] = await makeSqlQuery(sql, [responseObject.insertId]);
+      if (errorOrderDelete) {
+        return next(errorOrderDelete);
+      }
+
+      return next(new ApiError('something went wrong', 400));
+    }
+
     res.status(201).json({
       id: responseObject.insertId,
-      msg: 'Order created successfully',
+      message: 'Order created successfully',
     });
   },
   getSingle: async (req, res, next) => {
@@ -122,7 +138,28 @@ module.exports = {
       return next(new ApiError('Access denied!', 401));
     }
 
-    const sql = 'DELETE FROM `orders` WHERE id = ?';
+    let sql = 'SELECT `item_id`, `qty` FROM `orders` WHERE `id` = ?';
+
+    const [orderResponseObject, sqlError] = await makeSqlQuery(sql, [id]);
+    if (sqlError) {
+      return next(sqlError);
+    }
+
+    if (orderResponseObject.length === 0) {
+      return next(new ApiError('Order not found', 404));
+    }
+
+    sql = 'UPDATE `items` SET `stock` = `stock` + ? WHERE `id` = ?';
+    const [itemResponseObject, itemError] = await makeSqlQuery(sql, [
+      orderResponseObject[0].qty,
+      orderResponseObject[0].item_id,
+    ]);
+
+    if (itemError) {
+      return next(itemError);
+    }
+
+    sql = 'DELETE FROM `orders` WHERE id = ?';
 
     const [responseObject, error] = await makeSqlQuery(sql, [id]);
     if (error) {

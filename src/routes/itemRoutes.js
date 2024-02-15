@@ -13,6 +13,9 @@ itemRouter.get('/items', itemsController.getAll);
 // GET single item route /api/items/:itemId
 itemRouter.get('/items/:itemId', itemsController.getSingle);
 
+// PUT /api/items/1/rating
+itemRouter.put('/items/:itemId/rating', validateToken, itemsController.updateRating);
+
 // POST single item route /api/items
 itemRouter.post('/items', validateToken, validateItemBody, itemsController.create);
 

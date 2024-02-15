@@ -9,6 +9,7 @@ const { mainErrroHandler, validateToken } = require('./middleware');
 const itemRouter = require('./routes/itemRoutes');
 const categoryRouter = require('./routes/categoryRoutes');
 const orderRouter = require('./routes/orderRoutes');
+const itemRatingsRouter = require('./routes/itemRatingRouter');
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use('/api', itemRouter);
 app.use('/api', validateToken, categoryRouter);
 // /api         /order
 app.use('/api', validateToken, orderRouter);
+app.use('/api', validateToken, itemRatingsRouter);
 
 // 404 not found page api
 app.use((req, res) => {
